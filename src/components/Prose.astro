@@ -1,0 +1,43 @@
+---
+
+---
+
+<div class="content mb-24 space-y-4">
+  <slot />
+</div>
+
+<style is:global>
+  .content pre {
+    border-radius: 0.5rem;
+  }
+
+  .content pre > code {
+    padding: 1rem 0;
+    margin: 3rem 0;
+    background-color: #0f172a;
+    border-color: #0f172a;
+    border-radius: 0.5rem;
+    border-width: 0.25rem;
+  }
+
+  /* Line highlighting */
+  .content pre > code > [data-highlighted-line] {
+    background-color: #1e2a47;
+    border-left-width: 0.25rem;
+    border-left-color: #9ccfd8;
+    margin-left: -0.25rem;
+  }
+
+  /* Line numbers */
+  .content pre > code {
+    counter-reset: line;
+  }
+
+  .content pre > code > [data-line]::before {
+    counter-increment: line;
+    content: counter(line);
+    margin-right: 1.5rem;
+    text-align: right;
+    padding-left: 1rem;
+  }
+</style>

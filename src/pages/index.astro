@@ -1,0 +1,31 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const posts = (await Astro.glob("./posts/*.md")).sort((a, b) => {
+  return Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate);
+});
+---
+
+<BaseLayout>
+  <div class="space-y-14">
+    {
+      posts.map(post => (
+        <a class="block space-y-1" href={post.url}>
+          <article>
+            <h2 class="bg-gradient-to-r from-cyan-200 to-blue-200 bg-clip-text text-3xl font-bold capitalize text-transparent">
+              {post.frontmatter.title}
+            </h2>
+            <p class="font-bold text-gray-500">
+              {new Date(post.frontmatter.pubDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+              })}
+            </p>
+            <p>{post.frontmatter.description}</p>
+          </article>
+        </a>
+      ))
+    }
+  </div>
+</BaseLayout>

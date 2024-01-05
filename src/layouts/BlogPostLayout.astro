@@ -1,0 +1,45 @@
+---
+import Prose from "@/components/Prose.astro";
+import SocialNav from "@/components/SocialNav.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Nerdigy</title>
+  </head>
+  <body class="container mx-auto max-w-3xl bg-slate-800 px-4 text-white">
+    <header class="flex items-center justify-between pb-10 pt-4">
+      <a
+        href="/"
+        class="bg-gradient-to-r from-cyan-200 to-blue-200 bg-clip-text text-xl font-bold capitalize text-transparent">
+        Nerdigy</a
+      >
+      <SocialNav />
+    </header>
+    <main>
+      <div class="space-y-2 pb-10 text-center">
+        <h1 class="text-3xl font-bold capitalize text-white">
+          {frontmatter.title}
+        </h1>
+        <p class="text-lg font-bold text-slate-500">
+          {
+            new Date(frontmatter.pubDate).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric"
+            })
+          }
+        </p>
+      </div>
+      <Prose>
+        <slot />
+      </Prose>
+    </main>
+  </body>
+</html>
